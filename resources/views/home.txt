@@ -1,0 +1,148 @@
+ <h3>hey {{ $nom }} {{ $prenom }}</h3>
+    <h4>Cours :</h4>
+    <ul>
+        @foreach ($languages as $value)
+            <li>{{ $value }}</li>
+        @endforeach
+    </ul>
+    {{-- foreach --}}
+    <table border="3" width="100%">
+        <tr>
+            <th>Cours</th>
+        </tr>
+        @foreach ($languages as $value)
+            <tr>
+                <td>
+                    {{ $value }}
+                </td>
+            </tr>
+        @endforeach
+    </table>
+    {{-- if alse endif --}}
+    <h4>examan with if :</h4>
+    @if (count($examen) > 0):
+        <table border="3" width="100%">
+            <tr>
+                <th>examen</th>
+            </tr>
+            @foreach ($examen as $value)
+                <tr>
+                    <td>
+                        {{ $value }}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    @else
+        <p>no data</p>
+    @endif
+
+
+    {{-- unless unless !==if --}}
+    <h4>examan with unless :</h4>
+    @unless (count($examen) > 0)
+        <p>Pas de examan por l'instant.</p>
+    @else
+        <table border="3" width="100%">
+            <tr>
+                <th>examen</th>
+            </tr>
+            @foreach ($examen as $value)
+                <tr>
+                    <td>
+                        {{ $value }}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    @endunless
+
+
+    @isset($nom)
+        yes
+    @endisset
+
+    @empty($nom)
+        yes
+    @endempty
+
+    {{--- empty  --}}
+    <h4>languages with empty :</h4>
+    @empty($languages)
+        <p>Pas de languages por l'instant.</p>
+    @else
+        <table border="3" width="100%">
+            <tr>
+                <th>examen</th>
+            </tr>
+            @foreach ($languages as $value)
+                <tr>
+                    <td>
+                        {{ $value }}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    @endempty
+
+
+    "{{-- switch --}}"
+
+    <h4>colors with switch :</h4>
+
+    @switch($color)
+        @case('red')
+            Rouge
+        @break
+        @case("black")
+        Noir
+        @break
+
+        @default
+        => Couleur
+    @endswitch
+
+
+
+    <h4>statements:</h4>
+
+     @php
+         $n3=$n1+$n2
+     @endphp
+      $n3=$n1+$n2 = {{$n3}}
+
+Voici un exemple de lettre de motivation pour un stage en développement informatique. N’hésitez pas à l’adapter à votre parcours et au poste recherché :
+
+[Votre nom]
+[Votre adresse]
+[Votre téléphone]
+[Votre e-mail]
+[Date]
+
+[Nom de l’entreprise]
+[Adresse de l’entreprise]
+[Ville, Code postal]
+
+Objet : Candidature pour un stage en développement informatique
+
+Madame, Monsieur,
+
+Actuellement étudiant(e) en [nom de votre formation, ex. : Licence en Informatique ou Master en Génie Logiciel] à [nom de l’établissement], je suis à la recherche d’un stage de [durée du stage] à partir de [date de début]. Passionné(e) par le développement informatique et curieux(se) de découvrir de nouvelles approches, je serais honoré(e) de rejoindre votre équipe pour contribuer activement à vos projets.
+
+Au cours de ma formation, j’ai acquis des compétences solides en [mentionner vos compétences principales, ex. : programmation en Python et Java, conception de bases de données avec MySQL, ou développement d’applications web avec React et Node.js]. [Indiquez un projet réalisé dans le cadre de vos études ou personnel, ex. : "Lors d’un projet académique, j’ai développé une application de gestion de tâches collaborative, qui m’a permis d’approfondir mes connaissances en intégration front-end et back-end"].
+
+Ce stage représente pour moi une occasion idéale d’appliquer mes acquis, mais aussi d’apprendre auprès de professionnels aguerris. Votre entreprise, reconnue pour [mentionner un point fort de l’entreprise, ex. : "son expertise en solutions logicielles innovantes" ou "son engagement dans la transformation numérique"], correspond parfaitement à mes aspirations professionnelles.
+
+Autonome, rigoureux(se) et doté(e) d’un esprit d’équipe, je suis convaincu(e) de pouvoir m’intégrer facilement à votre environnement de travail tout en apportant ma contribution à vos projets de développement.
+
+Je serais ravi(e) de vous rencontrer pour discuter de mes compétences et de mes motivations. Dans l’attente d’un entretien, je vous remercie sincèrement pour l’attention portée à ma candidature.
+
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.
+
+[Votre nom]
+
+Conseils pour une lettre réussie :
+Adaptez au stage visé : Soulignez les technologies utilisées par l’entreprise qui correspondent à vos compétences.
+Parlez de projets concrets : Mentionnez un ou deux projets (scolaires ou personnels) pour illustrer vos compétences.
+Mettez en avant votre potentiel : Insistez sur votre envie d’apprendre et votre capacité à évoluer dans un environnement professionnel.
+Si vous avez besoin d’aide pour ajuster la lettre, n’hésitez pas ! 😊
