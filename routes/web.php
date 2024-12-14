@@ -24,8 +24,9 @@ Route::get('/profiles/{id}', [ProfileController::class,'show'])
 
 Route::get('/settings', [InfoController::class,'index'])->name('settings.index');
 
+Route::get('/profiles/create', [ProfileController::class,'create'])->name('create');
 
-
+Route::post('/profiles/store', [ProfileController::class,'store'])->name('store');
 
 
 
