@@ -19,6 +19,8 @@ class Profile extends Model
         "image"
 
     ];
+
+
     public function getRouteKeyName()
     {
         return 'id';
@@ -27,4 +29,7 @@ class Profile extends Model
     //     return $value??'profile/default.png';
     // }
 
+    public function publications(){
+        return $this->hasMany(Publication::class);
+    }
 }

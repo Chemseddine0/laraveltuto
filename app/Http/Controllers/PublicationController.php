@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PublicationsRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicationController extends Controller
 {
@@ -13,13 +14,17 @@ class PublicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth')->except(['show','index']);
+        // $this->middleware('auth')->only(['show']);
+    }
     public function index()
     {
              //  $profiles=Profile::all(); ---> all donees
             //  $publications = Publication::paginate(9);
             //  dd(Publication::all());
             // $publications =  Publication::latest()->get();
-            $publications =  Publication::latest()->paginate();
+            $publications =  Publication::latest()->paginate(11);
             //   dd(Publication::latest()->get());
              return view('publications.index', compact('publications'));
    
@@ -44,8 +49,10 @@ class PublicationController extends Controller
      */
     public function store(PublicationsRequest $request)
     {
+        // dd(Auth::id());
         $formFields = $request->validated();
         $this->uploadImage($request,$formFields);
+        $formFields['profile_id']=Auth::id();
         // Insertion
         Publication::create($formFields);
         return redirect()->route('publications.index')->with('success', 'Votre compte est bien cree');
@@ -60,6 +67,7 @@ class PublicationController extends Controller
     public function show(Publication $publication)
     {
         //
+        return view('profile.show', compact('publication'));
     }
 
     /**
@@ -86,7 +94,7 @@ class PublicationController extends Controller
         $formFields = $request->validated();
         $this->uploadImage($request,$formFields);
         $publication->fill($formFields)->save();
-        return to_route('publications.show',$publication->id)->with('success','la publication a ete bien Modifier');
+        return to_route('publications.index',$publication->id)->with('success','la publication a ete bien Modifier');
     }
 
     /**
@@ -97,7 +105,9 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        //
+        $publication->delete();
+
+        return to_route('publications.index')->with('danger','le profile a ete bien supprimer');
     }
     public function uploadImage(PublicationsRequest $request,array &$formFields){
         unset($formFields['image']);

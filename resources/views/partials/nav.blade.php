@@ -20,6 +20,9 @@
             <a class="nav-link " href="{{route('settings.index')}}" tabindex="-1" aria-disabled="false">My Inforamtion</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link " href="{{route('publications.index')}}" tabindex="-1" aria-disabled="false">My publications</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link " href="{{route('publications.create')}}" tabindex="-1" aria-disabled="false">ajouter  publications</a>
           </li>
           <div class="dropdown">
