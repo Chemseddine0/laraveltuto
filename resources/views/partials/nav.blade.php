@@ -11,13 +11,37 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
           </li>
+          @auth
           <li class="nav-item">
             <a class="nav-link" href="{{route('profiles.index')}}">My Profile</a>
           </li>
-
+    
           <li class="nav-item">
             <a class="nav-link " href="{{route('settings.index')}}" tabindex="-1" aria-disabled="false">My Inforamtion</a>
           </li>
+         
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ auth()->user()->name}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item"  href="{{route('login.logout')}}">logout</a></li>
+            
+            </ul>
+          </div>
+          @endauth
+          @guest
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('login.show')}}">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{route('profiles.create')}}" tabindex="-1" aria-disabled="false">Signup  profile</a>
+          </li>
+       
+          @endguest
+        
+        
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

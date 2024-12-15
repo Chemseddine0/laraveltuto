@@ -4,7 +4,7 @@
 @endsection --}}
 <x-master title="Home Page">
     
-
+<h1>Home</h1>
 {{-- @section('main') --}}
 {{-- <table class="table">
     <tr>
@@ -28,13 +28,13 @@
         </tr>
     @endforeach
 </table> --}}
-<x-alert type="warning"> 
+{{-- <x-alert type="warning"> 
     <strong>hey</strong> rd lbal 
 </x-alert>
 <x-alert type="danger"> 
     <strong>Erorr</strong> rd lbal 
 </x-alert>
-<x-usertable  :users="$users" />
+<x-usertable  :users="$users" /> --}}
 {{-- @endsection --}}
 
 

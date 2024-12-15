@@ -14,11 +14,13 @@
 
   @endif
 
-    <form method="POST" action="{{ route('profiles.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{route('profiles.update',$profile->id)}}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
+        <h1>Edit information</h1>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Name </label>
-            <input type="text" name="name" class="form-control" value="{{old('name')}}" id="exampleInputEmail1" >
+            <input type="text" name="name" class="form-control" value="{{old('name',$profile->name)}}" id="exampleInputEmail1" >
             @error('name')
             <div class="text-danger">{{$message}}</div> 
          @enderror
@@ -26,7 +28,7 @@
         
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email </label>
-          <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{old('email')}}"  aria-describedby="emailHelp">
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{old('email',$profile->email)}}"  aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           @error('email')
             <div class="text-danger">{{$message}}</div> 
@@ -46,7 +48,7 @@
         </div>
         <div class="mb-3">
             <label for="bio" class="form-label">Description</label>
-            <textarea  name="bio" class="form-control" id="exampleInputPassword1"  >{{old('bio')}}  </textarea>
+            <textarea  name="bio" class="form-control" id="exampleInputPassword1"  >{{old('bio',$profile->bio)}}  </textarea>
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Image</label>
