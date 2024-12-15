@@ -13,13 +13,15 @@
           </li>
           @auth
           <li class="nav-item">
-            <a class="nav-link" href="{{route('profiles.index')}}">My Profile</a>
+            <a class="nav-link" href="{{route('profiles.index')}}">tous les Profile</a>
           </li>
     
           <li class="nav-item">
             <a class="nav-link " href="{{route('settings.index')}}" tabindex="-1" aria-disabled="false">My Inforamtion</a>
           </li>
-         
+          <li class="nav-item">
+            <a class="nav-link " href="{{route('publications.create')}}" tabindex="-1" aria-disabled="false">ajouter  publications</a>
+          </li>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               {{ auth()->user()->name}}
@@ -36,9 +38,9 @@
             <a class="nav-link active" aria-current="page" href="{{route('login.show')}}">Sign in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{route('profiles.create')}}" tabindex="-1" aria-disabled="false">Signup  profile</a>
+            <a class="nav-link " href="{{route('profiles.create')}}" tabindex="-1" aria-disabled="false">ajouter  profile</a>
           </li>
-       
+      
           @endguest
         
         

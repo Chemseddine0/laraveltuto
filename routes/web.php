@@ -3,9 +3,13 @@ use App\Http\Controllers\homeController; //import controller homeController
 use App\Http\Controllers\ProfileController; //import controller ProfileController
 use App\Http\Controllers\InfoController; //import controller InfoController
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PublicationController;
 use App\Services\Calcul;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Route;
+
+
 
 // route::name('profiles.')->prefix('profiles')->group(function () {
 //      Route::controller( ProfileController::class)->group(function(){
@@ -20,6 +24,7 @@ use Illuminate\Http\Request;
 // } );
 
 Route::resource('profiles',ProfileController::class);
+Route::resource('publications',PublicationController::class);
 
 route::middleware(['guest'])->group(function () {
     
@@ -70,13 +75,69 @@ Route::get('/settings', [InfoController::class,'index'])->name('settings.index')
 
 
 
+Route::view('/form','form');
+Route::post('/form',function(Request $request) {
+        // dd($request->date('input_field')->addDay());
+        
+        $request->mergeIfMissing(['input_field'=>date('Y-m-d')]);
+        dd($request->input('input_field'));
+        //only
+        //except    
+        // $request->hasAny(['input_field','input_field2']);
+        // $request->missing(['input_field','input_field2']);
+        // $request->whenHas(['input_field','input_field2'],function(){});
+})->name('form');
 
 
+//Response (download,afficher)
 
 
-
-
+Route::get('/salam',function() {
+    // $response = new Response( 'salam',500  );
+    // return $response ;
+    //Response (download,afficher)
+    return Response()->download('storage/profile/default.png','name fichier',[],'inline');
+    // $response = new Response(  )->file();
+   
+});
 
 
 // php artisan route:cache 
 // php artisan route:clear
+
+//Cookies (create,destroy)
+    Route::get('/cookie/get',function(Request $request) {
+        dd($request->cookie('age'));
+    });
+    Route::get('/cookie/set/{cookie}',function($cookie) {
+        $response = new Response();
+        $cookieObject=cookie()->forever(    'age',$cookie);
+    return  $response->withCookie($cookieObject);
+    });
+
+    // Headers + Request 
+    //Content-Type :text/plain image/png Application/json
+     //cash
+      //x-profile =15
+    //400,200
+    //Server -> navigateur
+    Route::get('/headers',function(Request $request) {
+        $response = new Response(['data' => 'ok']);
+
+    //   dd($request->header('aa','aa'));
+      dd($request->header('host'));
+        return  $response->withHeaders( [
+            'Content-Type'=> 'Application/json',
+              'x-chemseddine'=> 'yes'
+            ] );
+    });
+    // Request
+    Route::get('/request',function(Request $request) {
+        // dd($request->url(),$request->fullUrl());
+        // dd($request->path());
+        // dd($request->is('request'));
+        // dd($request->host());
+        // dd($request->method());
+        // dd($request->isMethod('GET'));
+        dd($request->ip());
+    });

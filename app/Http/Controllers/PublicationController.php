@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublicationsRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class PublicationController extends Controller
     public function index()
     {
         //
+   
     }
 
     /**
@@ -25,6 +27,7 @@ class PublicationController extends Controller
     public function create()
     {
         //
+        return view("publications.create");
     }
 
     /**
@@ -33,9 +36,13 @@ class PublicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PublicationsRequest $request)
     {
-        //
+        $formFields = $request->validated();
+        $this->uploadImage($request,$formFields);
+        // Insertion
+        Publication::create($formFields);
+        return redirect()->route('publications.index')->with('success', 'Votre compte est bien cree');
     }
 
     /**
@@ -58,6 +65,7 @@ class PublicationController extends Controller
     public function edit(Publication $publication)
     {
         //
+        return view("publications.edit", compact('publication'));
     }
 
     /**
@@ -67,9 +75,12 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publication $publication)
+    public function update(PublicationsRequest $request, Publication $publication)
     {
-        //
+        $formFields = $request->validated();
+        $this->uploadImage($request,$formFields);
+        $publication->fill($formFields)->save();
+        return to_route('publications.show',$publication->id)->with('success','la publication a ete bien Modifier');
     }
 
     /**
@@ -81,5 +92,13 @@ class PublicationController extends Controller
     public function destroy(Publication $publication)
     {
         //
+    }
+    public function uploadImage(PublicationsRequest $request,array &$formFields){
+        unset($formFields['image']);
+        if($request->hasFile('image')){
+            $formFields['image'] = $request->file('image')->store('publication','public');
+        }
+
+
     }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('publications', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('profiles', function (Blueprint $table) {
+            //
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications');
+        Schema::table('profiles', function (Blueprint $table) {
+            //
+        });
     }
 };
