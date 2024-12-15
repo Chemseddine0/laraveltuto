@@ -15,7 +15,13 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+             //  $profiles=Profile::all(); ---> all donees
+            //  $publications = Publication::paginate(9);
+            //  dd(Publication::all());
+            // $publications =  Publication::latest()->get();
+            $publications =  Publication::latest()->paginate();
+            //   dd(Publication::latest()->get());
+             return view('publications.index', compact('publications'));
    
     }
 
