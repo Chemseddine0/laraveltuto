@@ -5,38 +5,63 @@
         @auth
         @if (auth()->user()->id === $publication->profile_id)
         <a  type="button" href="{{route('publications.edit',$publication->id)}}" class="float-end btn btn-sm btn-success">Modifier</a>
-        <form action="{{route('publications.destroy',$publication->id)}}" method="post">
-            @method('DELETE')
-            @csrf
-            <button onclick="return confirm('Voulez vous vraiment Deleted cette publication ')" class="btn btn-danger btn-sm float-end">Deleted</button>
-        </form>
-      
-        
-        @endif
-        @endauth
-       
-    </div>
-   
-    <h2 class="publication-title">{{$publication->titre}}</h2>
-    <p class="publication-text">{{$publication->body}}</p>
-    @if(!is_null($publication->image))
-    <img src="{{ asset('storage/'.$publication->image) }}" alt="Image de l'article">
+<form action="{{route('publications.destroy',$publication->id)}}" method="post">
+    @method('DELETE')
+    @csrf
+    <button onclick="return confirm('Voulez vous vraiment Deleted cette publication ')" class="btn btn-danger btn-sm float-end">Deleted</button>
+</form>
 
-    @endif
-   
+
+@endif
+@endauth
+
+</div>
+
+<h2 class="publication-title">{{$publication->titre}}</h2>
+<p class="publication-text">{{$publication->body}}</p>
+@if(!is_null($publication->image))
+<img src="{{ asset('storage/'.$publication->image) }}" alt="Image de l'article">
+
+@endif
+
 </div> --}}
 
 
 
+<div class="feed">
+    <div class="head">
+        <div class="user">
+            <div class="profile-photo">
+                <img src="{{ asset('storage/'.$publication->profile?->image) }}">
+            </div>
+            <div class="info">
+                <h3>{{$publication->profile?->name}}</h3>
+
+                <small>{{$publication->created_at->diffForHumans()}}</small>
+            </div>
+        </div>
+        <span class="edit">
+            {{-- <i class="uil uil-ellipsis-h"></i>
+<i class="uil uil-trash" style="color: #ff0000;font-size:25px"></i>
+<i class="fa-solid fa-trash fa-xs" style="color: #ff0000;"></i>
+<i class="uis uis-trash"></i> --}}
+
+            @auth
+            @if (auth()->user()->id === $publication->profile_id)
+            <i class="uil uil-ellipsis-h"></i>
+            <a type="submit" href="{{route('publications.edit',$publication->id)}}"><i class="uil uil-edit" style="color: #052bff;font-size:20px;float:right"></i></a>
+            <form action="{{route('publications.destroy',$publication->id)}}" method="post" style="display: inline;">
+                @method('DELETE')
+                @csrf
+                {{-- <a type="button" onclick="return confirm('Voulez vous vraiment Deleted cette publication ')"><i class="uil uil-trash" style="color: #ff0000;font-size:25px"></i></a> --}}
+                 <button onclick="return confirm('Voulez vous vraiment Deleted cette publication ')" style="background-color: transparent;width:7px;padding:5px;margin-right:25px" class="btn btn-danger btn-sm float-end d-none "><i class="uil uil-trash" style="color: #ff0000;font-size:20px"></i></button>
+            </form>
+            @endif
+            @endauth
 
 
-<small>{{$publication->created_at->diffForHumans()}}</small>
-</div>
-</div>
-<span class="edit">
-<i class="uil uil-ellipsis-h"></i>
-</span>
-</div>
+        </span>
+    </div>
     <div class="photo">
         <img src="{{ asset('storage/'.$publication->image) }}">
     </div>
@@ -56,8 +81,9 @@
 
     <div class="caption">
         <p><b></b>{{$publication->body}}
-        <span class="harsh-tag">#lifestyle</span></p>
+            <span class="harsh-tag"></span>
+        </p>
     </div>
 
-    
+
 </div>

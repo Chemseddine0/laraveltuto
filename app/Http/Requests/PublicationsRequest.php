@@ -26,7 +26,7 @@ class PublicationsRequest extends FormRequest
         return [
 
             'titre' => 'required|min:5|max:200',
-            'body' => 'required|min:20',
+            'body' => 'required|min:2',
             'image' => 'image|mimes:png,jpeg,webp,jpg,svg|max:10240',
         ];
     }

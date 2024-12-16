@@ -16,4 +16,7 @@ class Publication extends Model
         "profile_id"
 
     ];
+    public function profile(){
+        return $this->belongsTo(Profile::class,'id',);
+    }
 }

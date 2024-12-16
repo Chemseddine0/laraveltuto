@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mySocial - Responsive Social Media Website Using HTML, CSS, & JavaScript</title>
+    <title>mySocial </title>
     <!-- IconScout CDN -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
     <!-- Stylesheet -->
@@ -163,14 +163,7 @@
             
                     @foreach($profile->publications as $publication)
                     
-<div class="feed">
-    <div class="head">
-        <div class="user">
-            <div class="profile-photo">
-                <img src="{{ asset('storage/'.$profile->image) }}">
-            </div>
-            <div class="info">
-                <h3>{{$profile->name}}</h3>
+
   
                     <x-publication canUpdate='auth()->user()->id === $publication->profile_id' :publication="$publication"/>
                     @endforeach
