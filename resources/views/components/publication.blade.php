@@ -35,7 +35,7 @@
                 <img src="{{ asset('storage/'.$publication->profile?->image) }}">
             </div>
             <div class="info">
-                <h3>{{$publication->profile?->name}}</h3>
+                <h3>{{$publication->profile?->name}}</h3>{{-- NAME--}}
 
                 <small>{{$publication->created_at->diffForHumans()}}</small>
             </div>
