@@ -15,6 +15,6 @@
 </div>
 {{$profiles->links()}}
 
-  
-         
+  a
+    
 </x-master>

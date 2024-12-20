@@ -106,7 +106,7 @@
                            
                     @foreach($profile->publications as $publication)
                  
-                                <div class="feed">
+                                {{-- <div class="feed">
                                     <div class="head">
                                         <div class="user">
                                             <div class="profile-photo">
@@ -117,7 +117,7 @@
                                 <small>{{$publication->created_at->diffForHumans()}}</small>
                             </div>
                         </div>
-                        <span class="edit">
+                        <span class="edit"> --}}
                     <x-publication canUpdate='auth()->user()->id === $publication->profile_id' :publication="$publication"/>
                     @endforeach
                 

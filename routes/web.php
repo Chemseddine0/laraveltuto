@@ -76,17 +76,17 @@ Route::get('/settings', [InfoController::class,'index'])->name('settings.index')
 
 
 Route::view('/form','form');
-Route::post('/form',function(Request $request) {
-        // dd($request->date('input_field')->addDay());
+// Route::post('/form',function(Request $request) {
+//         // dd($request->date('input_field')->addDay());
         
-        $request->mergeIfMissing(['input_field'=>date('Y-m-d')]);
-        dd($request->input('input_field'));
-        //only
-        //except    
-        // $request->hasAny(['input_field','input_field2']);
-        // $request->missing(['input_field','input_field2']);
-        // $request->whenHas(['input_field','input_field2'],function(){});
-})->name('form');
+//         $request->mergeIfMissing(['input_field'=>date('Y-m-d')]);
+//         dd($request->input('input_field'));
+//         //only
+//         //except    
+//         // $request->hasAny(['input_field','input_field2']);
+//         // $request->missing(['input_field','input_field2']);
+//         // $request->whenHas(['input_field','input_field2'],function(){});
+// })->name('form');
 
 
 //Response (download,afficher)

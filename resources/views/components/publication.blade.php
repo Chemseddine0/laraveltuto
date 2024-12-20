@@ -16,6 +16,7 @@
             <i class="uil uil-ellipsis-h"></i>
             <a type="submit" href="{{route('publications.edit',$publication->id)}}"><i class="uil uil-edit"
                     style="color: #052bff;font-size:20px;float:right"></i></a>
+
             <form action="{{route('publications.destroy',$publication->id)}}" method="post" style="display: inline;">
                 @method('DELETE')
                 @csrf
