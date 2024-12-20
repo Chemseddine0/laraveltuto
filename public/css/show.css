@@ -56,11 +56,13 @@ body {
     aspect-ratio: 1/1;
     border-radius: 50%;
     overflow: hidden;
+
 }
 
 img {
     display: block;
     width: 100%;
+  
 }
 
 .btn {

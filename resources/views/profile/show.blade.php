@@ -49,90 +49,31 @@
                         
                     </div>
                 </a>
-
+                <a class="profile" style="margin-top: 10px">
+                    {{-- <div class="profile-photo">
+                        
+                    </div> --}}
+                    <div class="handle">
+                        
+                        <p class="text-muted">
+                            {{$profile->bio}}
+                            
+                        </p>
+                        <p class="text-muted">
+                           
+                        </p>
+                        
+                    </div>
+                </a>
                 <!----------------- SIDEBAR -------------------->
                 <div class="sidebar">
-                    <a class="menu-item active">
+                    <a class="menu-item active" >
+                        <span><i class="uil uil-home"></i></span>
+                        <h3>My Page</h3>   
+                    </a>
+                    <a class="menu-item">
                         <span><i class="uil uil-home"></i></span>
                         <h3>Home</h3>   
-                    </a>
-                    <a class="menu-item">
-                        <span><i class="uil uil-compass"></i></span>
-                        <h3>Explore</h3>
-                    </a>
-                    <a class="menu-item"  id="notifications">
-                        <span><i class="uil uil-bell"><small class="notification-count">9+</small></i></span>
-                        <h3>Notification</h3>
-                        <!--------------- NOTIFICATION POPUP --------------->
-                        <div class="notifications-popup">
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="./images/profile-2.jpg">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Keke Benjamin</b> accepted your friend request
-                                    <small class="text-muted">2 Days Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="./images/profile-3.jpg">
-                                </div>
-                                <div class="notification-body">
-                                    <b>John Doe</b> commented on your post
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="./images/profile-4.jpg">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Marry Oppong</b> and <b>283 Others</b> liked your post
-                                    <small class="text-muted">4 Minutes Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="./images/profile-5.jpg">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Doris Y. Lartey</b> commented on a post you are tagged in
-                                    <small class="text-muted">2 Days Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="./images/profile-6.jpg">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Keyley Jenner</b> commented on a post you are tagged in
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="./images/profile-7.jpg">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Jane Doe</b> commented on your post
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                        </div>
-                        <!--------------- END NOTIFICATION POPUP --------------->
-                    </a>
-                    <a class="menu-item" id="messages-notifications">
-                        <span><i class="uil uil-envelope-alt"><small class="notification-count">6</small></i></span>
-                        <h3>Messages</h3>
-                    </a>
-                    <a class="menu-item">
-                        <span><i class="uil uil-bookmark"></i></span>
-                        <h3>Bookmarks</h3>
-                    </a>
-                    <a class="menu-item">
-                        <span><i class="uil uil-chart-line"></i></span>
-                        <h3>Analytics</h3>
                     </a>
                     <a class="menu-item" id="theme">
                         <span><i class="uil uil-palette"></i></span>
@@ -144,27 +85,39 @@
                     </a>
                 </div>
                 <!----------------- END OF SIDEBAR -------------------->
-                <label class="btn btn-primary" for="create-post">Create Post</label>
+                <a href="{{route('publications.create')}}">
+                <label class="btn btn-primary" >Create Post</label></a>
             </div>
 
             <!----------------- MIDDLE -------------------->
             <div class="middle">
                  
-                <form action="" class="create-post">
+                <form action="{{route('publications.create')}}" class="create-post">
                     <div class="profile-photo">
                         <img src="{{ asset('storage/'.$profile->image) }}">
                     </div>
                     <input type="text" placeholder="What's on your mind,{{$profile->name}} " id="create-post">
-                    <input type="submit" value="Post" class="btn btn-primary">
+                    <input type="submit" value="Post" class="btn btn-primary" href="{{route('publications.create')}}" >
                 </form>
                 <!----------------- FEEDS -------------------->
                 <div class="feeds">
                     <!----------------- FEED 1 -------------------->
-            
-                    @foreach($profile->publications as $publication)
-                    
 
-  
+                           
+                    @foreach($profile->publications as $publication)
+                 
+                                <div class="feed">
+                                    <div class="head">
+                                        <div class="user">
+                                            <div class="profile-photo">
+                                                <img src="{{ asset('storage/'.$profile->image) }}">
+                                            </div>
+                                            <div class="info">
+                                <h3>{{$profile->name}}</h3>
+                                <small>{{$publication->created_at->diffForHumans()}}</small>
+                            </div>
+                        </div>
+                        <span class="edit">
                     <x-publication canUpdate='auth()->user()->id === $publication->profile_id' :publication="$publication"/>
                     @endforeach
                 
@@ -183,153 +136,7 @@
             </div>
              <!----------------- END OF MIDDLE -------------------->
 
-            <!----------------- RIGHT -------------------->
-            <div class="right">
-                <!------- MESSAGES ------->
-                <div class="messages">
-                    <div class="heading">
-                        <h4>Messages</h4>
-                        <i class="uil uil-edit"></i>
-                    </div>
-                    <!------- SEARCH BAR ------->
-                    <div class="search-bar">
-                        <i class="uil uil-search"></i>
-                        <input type="search" placeholder="Search messages" id="message-search">
-                    </div>
-                    <!------- MESSAGES CATEGORY ------->
-                    <div class="category">
-                        <h6 class="active">Primary</h6>
-                        <h6>General</h6>
-                        <h6 class="message-requests">Requests (7)</h6>
-                    </div>
-                    <!------- MESSAGES ------->
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="./images/profile-17.jpg">
-                        </div>
-                        <div class="message-body">
-                            <h5>Edem Quist</h5>
-                            <p class="text-muted">Just woke up bruh</p>
-                        </div>
-                    </div>
-                    <!------- MESSAGES ------->
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="./images/profile-6.jpg">
-                        </div>
-                        <div class="message-body">
-                            <h5>Daniella Jackson</h5>
-                            <p class="text-bold">2 new messages</p>
-                        </div>
-                    </div>
-                    <!------- MESSAGES ------->
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="./images/profile-8.jpg">
-                            <div class="active"></div>
-                        </div>
-                        <div class="message-body">
-                            <h5>Chantel Msiza</h5>
-                            <p class="text-muted">lol u right</p>
-                        </div>
-                    </div>
-                    <!------- MESSAGES ------->
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="./images/profile-10.jpg">
-                        </div>
-                        <div class="message-body">
-                            <h5>Juliet Makarey</h5>
-                            <p class="text-muted">Birtday Tomorrow</p>
-                        </div>
-                    </div>
-                    <!------- MESSAGES ------->
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="./images/profile-3.jpg">
-                            <div class="active"></div>
-                        </div>
-                        <div class="message-body">
-                            <h5>Keylie Hadid</h5>
-                            <p class="text-bold">5 new messages</p>
-                        </div>
-                    </div>
-                    <!------- MESSAGES ------->
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="./images/profile-15.jpg">
-                        </div>
-                        <div class="message-body">
-                            <h5>Benjamin Dwayne</h5>
-                            <p class="text-muted">haha got that!</p>
-                        </div>
-                    </div>
-                </div>
-                <!------- END OF MESSAGES ------->
-
-                <!------- FRIEND REQUEST ------->
-                <div class="friend-requests">
-                    <h4>Requests</h4>
-                    <div class="request">
-                        <div class="info">
-                            <div class="profile-photo">
-                                <img src="./images/profile-20.jpg">
-                            </div>
-                            <div>
-                                <h5>Hajia Bintu</h5>
-                                <p class="text-muted">8 mutual friends</p>
-                            </div>
-                        </div>
-                        <div class="action">
-                            <button class="btn btn-primary">
-                                Accept
-                            </button>
-                            <button class="btn">
-                                Decline
-                            </button>
-                        </div>
-                    </div>
-                    <div class="request">
-                        <div class="info">
-                            <div class="profile-photo">
-                                <img src="./images/profile-18.jpg">
-                            </div>
-                            <div>
-                                <h5>Edelson Mandela</h5>
-                                <p class="text-muted">2 mutual friends</p>
-                            </div>
-                        </div>
-                        <div class="action">
-                            <button class="btn btn-primary">
-                                Accept
-                            </button>
-                            <button class="btn">
-                                Decline
-                            </button>
-                        </div>
-                    </div>
-                    <div class="request">
-                        <div class="info">
-                            <div class="profile-photo">
-                                <img src="./images/profile-17.jpg">
-                            </div>
-                            <div>
-                                <h5>Megan Baldwin</h5>
-                                <p class="text-muted">5 mutual friends</p>
-                            </div>
-                        </div>
-                        <div class="action">
-                            <button class="btn btn-primary">
-                                Accept
-                            </button>
-                            <button class="btn">
-                                Decline
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!----------------- END OF RIGHT -------------------->
+       
         </div>
     </main>
 

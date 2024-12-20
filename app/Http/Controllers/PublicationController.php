@@ -6,6 +6,7 @@ use App\Http\Requests\PublicationsRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PublicationController extends Controller
 {
@@ -68,6 +69,7 @@ class PublicationController extends Controller
     {
         //
         return view('profile.show', compact('publication'));
+       
     }
 
     /**
@@ -78,7 +80,15 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
-        //
+        //methode basic try gate
+                // verify if id user === piblication user id
+        // if(!Gate::allows ('update-publication', $publication)){
+        //     abort(403);
+
+        // }
+    //     Profile  $profiler,Publication $publication
+    //    dd(Gate::allows ('update-publication', $publication));
+        Gate::authorize('update-publication', $publication);
         return view("publications.edit", compact('publication'));
     }
 
@@ -91,6 +101,13 @@ class PublicationController extends Controller
      */
     public function update(PublicationsRequest $request, Publication $publication)
     {
+        // verify if id user === piblication user id
+        // if(Auth::id() !== $publication->profile_id){
+        //     abort(404);
+        //     dd('dont have permission');
+        // }
+        Gate::authorize('update-publication', $publication);
+
         $formFields = $request->validated();
         $this->uploadImage($request,$formFields);
         $publication->fill($formFields)->save();
