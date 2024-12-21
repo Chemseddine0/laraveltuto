@@ -1,42 +1,4 @@
-{{-- 
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mySocial </title>
-    <!-- IconScout CDN -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('css/show.css') }}">
-    <title>Voir les Publications</title>
-</head>
 
-
-<body>
-    @include('partials.nav')
-    <header>
-        
-        <h1>Voir les Publications</h1>
-    </header>
-
-    <div class="container">
-        @foreach($publications as $publication)
-        {{-- <x-publication canUpdate='auth()->user()->id === $publication->profile_id' :publication="$publication"/> 
-        <x-publication  :publication="$publication"/>
-
-        @endforeach
-
-
-
-    </div>
-
-    <footer>
-        &copy; 2024 Mon Site de Publication
-    </footer>
-   --}}
 
 
 
@@ -51,9 +13,12 @@
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
         <!-- Stylesheet -->
         <link rel="stylesheet" href="{{ asset('css/show.css') }}">
+<script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" /> 
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     </head>
     <body>
-        <nav>
+        {{-- <nav>
             <div class="container">
                 <h2 class="logo">
                     mySocial
@@ -65,11 +30,12 @@
                 <div class="create">
                     <label class="btn btn-primary" for="create-post">Create</label>
                     <div class="profile-photo">
-                        {{-- <img src="{{ asset('storage/'.$profile->image) }}" alt=""> --}}
+                        {{-- <img src="{{ asset('storage/'.$profile->image) }}" alt=""> 
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav>  --}}
+        @include('partials.nav')
     
         <!-------------------------------- MAIN ----------------------------------->
         <main>
@@ -78,12 +44,13 @@
                 <div class="left">
                     <a class="profile">
                         <div class="profile-photo">
-                            {{-- <img src="{{ asset('storage/'.$profile->image) }}"> --}}
+                            <img src="{{ asset('storage/'.auth()->user()->image) }}">
                         </div>
                         <div class="handle">
                             {{-- <h4>{{$profile->name}}</h4> --}}
                             <p class="text-muted">@
                                 {{-- {{$profile->name}} --}}
+                                {{auth()->user()->name}}
                             </p>
                             <p class="text-muted">
                                 {{-- {{$profile->created_at->format('M d Y');}} --}}
@@ -91,7 +58,23 @@
                             
                         </div>
                     </a>
-            
+                    <a class="profile" style="margin-top: 10px">
+                        {{-- <div class="profile-photo">
+                            
+                        </div> --}}
+                        <div class="handle">
+                            
+                            <p class="text-muted">
+                                {{-- {{$profile->bio}} --}}
+                                {{auth()->user()->bio}}
+                                
+                            </p>
+                            <p class="text-muted">
+                               
+                            </p>
+                            
+                        </div>
+                    </a>
                     <!----------------- SIDEBAR -------------------->
                     <div class="sidebar">
                         <a class="menu-item " >
@@ -121,7 +104,7 @@
                      
                     <form action="{{route('publications.create')}}" class="create-post">
                         <div class="profile-photo">
-                          <img src="" alt="aa"> 
+                          <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="aa"> 
                         </div>
                         <input type="text" placeholder="What's on your mind, " id="create-post">
                         <input type="submit" value="Post" class="btn btn-primary" href="{{route('publications.create')}}" > 
