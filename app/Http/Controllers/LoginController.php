@@ -11,7 +11,7 @@ class LoginController extends Controller
     //
     public function show()
     {
-
+        
 
         return view("login.show");
     }
@@ -22,7 +22,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
+     
         $email = $request->email;
         $password = $request->password;
         $credentials =    ["email" => $email, "password" => $password];

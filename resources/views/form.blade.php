@@ -1,4 +1,4 @@
-<x-social title="Page d'accueil">
+{{-- <x-social title="Page d'accueil">
 <h3>Request/Response</h3>
 <form method="post"action="">
     @csrf
@@ -7,4 +7,5 @@
 
 </form>
 
-</x-social>
+</x-social> --}}
+test

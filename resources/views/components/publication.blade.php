@@ -11,12 +11,15 @@
         </div>
 
         <span class="edit">
-            @auth
-            @if (auth()->user()->id === $publication->profile_id)
+            {{-- @auth
+            @if (auth()->user()->id === $publication->profile_id) --}}
+            @can('update', $publication)
             <i class="uil uil-ellipsis-h"></i>
             <a type="submit" href="{{route('publications.edit',$publication->id)}}"><i class="uil uil-edit"
                     style="color: #052bff;font-size:20px;float:right"></i></a>
-
+                    @endcan
+    
+@can('delete', $publication)
             <form action="{{route('publications.destroy',$publication->id)}}" method="post" style="display: inline;">
                 @method('DELETE')
                 @csrf
@@ -27,10 +30,10 @@
                     class="btn btn-danger btn-sm float-end d-none "><i class="uil uil-trash"
                         style="color: #ff0000;font-size:20px"></i></button>
             </form>
-            @endif
-            @endauth
+            {{-- @endif
+            @endauth --}}
 
-
+            @endcan
         </span>
     </div>
     <div class="photo">

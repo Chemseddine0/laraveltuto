@@ -121,7 +121,7 @@
                      
                     <form action="{{route('publications.create')}}" class="create-post">
                         <div class="profile-photo">
-                          <img src=""> 
+                          <img src="" alt="aa"> 
                         </div>
                         <input type="text" placeholder="What's on your mind, " id="create-post">
                         <input type="submit" value="Post" class="btn btn-primary" href="{{route('publications.create')}}" > 

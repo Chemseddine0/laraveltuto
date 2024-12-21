@@ -88,7 +88,11 @@ class PublicationController extends Controller
         // }
     //     Profile  $profiler,Publication $publication
     //    dd(Gate::allows ('update-publication', $publication));
-        Gate::authorize('update-publication', $publication);
+       
+    // Gate::authorize('update-publication', $publication);
+    //    Gate::authorize('update', $publication);
+       $this->authorize('update', $publication);
+
         return view("publications.edit", compact('publication'));
     }
 
@@ -106,7 +110,7 @@ class PublicationController extends Controller
         //     abort(404);
         //     dd('dont have permission');
         // }
-        Gate::authorize('update-publication', $publication);
+        // Gate::authorize('update-publication', $publication);
 
         $formFields = $request->validated();
         $this->uploadImage($request,$formFields);
@@ -122,6 +126,7 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
+        $this->authorize('delete', $publication);
         $publication->delete();
 
         return to_route('publications.index')->with('danger','le profile a ete bien supprimer');
