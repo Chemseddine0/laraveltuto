@@ -1,3 +1,4 @@
+
 <div class="feed">
     <div class="head">
         <div class="user">
@@ -6,7 +7,7 @@
             </div>
             <div class="info">
                 <h3>{{$publication->profile->name}}</h3>
-                <small>{{$publication->created_at->diffForHumans()}}</small>
+                <small>Miami , {{$publication->created_at->diffForHumans()}}</small>
             </div>
         </div>
 
@@ -15,8 +16,10 @@
             @if (auth()->user()->id === $publication->profile_id) --}}
             @can('update', $publication)
             <i class="uil uil-ellipsis-h"></i>
-            <a type="submit" href="{{route('publications.edit',$publication->id)}}"><i class="uil uil-edit"
+            <a type="submit"  href="{{route('publications.edit',$publication->id)}}"><i class="uil uil-edit"
                     style="color: #052bff;font-size:20px;float:right"></i></a>
+                 
+                   
                     @endcan
     
 @can('delete', $publication)
@@ -54,7 +57,7 @@
 
 
     <div class="caption">
-        <p><b></b>{{$publication->body}}
+        <p><b>{{$publication->profile->name}} :</b>{{$publication->body}}
             <span class="harsh-tag"></span>
         </p>
     </div>

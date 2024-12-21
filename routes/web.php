@@ -38,7 +38,7 @@ route::middleware(['guest'])->group(function () {
 
 Route::get('/logout', [LoginController::class,'logout'])->name('login.logout');
 // Route::get('/', [homeController::class,'index'])->name(name: 'home')->middleware('auth');
-Route::get('/', [homeController::class,'index'])->name( 'home');
+Route::get('/', [PublicationController::class,'index'])->name('publications.index');
 
 Route::get('/age/{age?}',function($age= null) {
     if (empty($age)) {

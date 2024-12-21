@@ -30,7 +30,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             //connected
             $request->session()->regenerate();
-            return to_route("home")->with("success","Vous etes bien connecte". $email ."  .");
+            return to_route("publications.index")->with("success","Vous etes bien connecte". $email ."  .");
         }else{
             //not connected
             return back()->withErrors([

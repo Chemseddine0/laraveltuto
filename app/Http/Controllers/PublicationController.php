@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PublicationsRequest;
+use App\Models\Profile;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class PublicationController extends Controller
         $this->middleware('auth')->except(['show','index']);
         // $this->middleware('auth')->only(['show']);
     }
+   
     public function index()
     {
              //  $profiles=Profile::all(); ---> all donees
@@ -26,6 +28,7 @@ class PublicationController extends Controller
             //  dd(Publication::all());
             // $publications =  Publication::latest()->get();
             $publications =  Publication::latest()->paginate(11);
+            // $profiles = Profile::paginate(9);
             //   dd(Publication::latest()->get());
              return view('publications.index', compact('publications'));
    

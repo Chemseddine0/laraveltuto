@@ -20,6 +20,8 @@ class ProfileController extends Controller
         $profiles = Profile::paginate(9);
         // dd(Profile::all());
         return view('profile.index', compact('profiles'));
+        // return view('publications.index', compact('profiles'));
+
     }
     public function show(Profile $profile)
     {

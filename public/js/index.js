@@ -16,7 +16,7 @@ const colorPalette = document.querySelectorAll('.choose-color span');
 const Bg1 = document.querySelector('.bg-1');
 const Bg2 = document.querySelector('.bg-2');
 const Bg3 = document.querySelector('.bg-3');
-const Bg4 = document.querySelector('.bg-4');
+
 
 // ============== SIDEBAR ============== 
 
@@ -164,13 +164,12 @@ colorPalette.forEach(color => {
 let lightColorLightness;
 let whiteColorLightness;
 let darkColorLightness;
-let darkColorPurple;
+
 // Changes background color
 const changeBG = () => {
     root.style.setProperty('--light-color-lightness', lightColorLightness);
     root.style.setProperty('--white-color-lightness', whiteColorLightness);
     root.style.setProperty('--dark-color-lightness', darkColorLightness);
-    root.style.setProperty('--dark-color-purple', darkColorPurple);
 }
 
 Bg1.addEventListener('click', () => {
@@ -187,6 +186,7 @@ Bg2.addEventListener('click', () => {
     darkColorLightness = '95%';
     whiteColorLightness = '20%';
     lightColorLightness = '15%';
+
     // add active class
     Bg2.classList.add('active');
     // remove active class from the others
@@ -199,20 +199,6 @@ Bg3.addEventListener('click', () => {
     darkColorLightness = '95%';
     whiteColorLightness = '10%';
     lightColorLightness = '0%';
-
-    // add active class
-    Bg3.classList.add('active');
-    // remove active class from the others
-    Bg1.classList.remove('active');
-    Bg2.classList.remove('active');
-    changeBG();
-});
-Bg4.addEventListener('click', () => {
-    darkColorLightness = '95%';
-    whiteColorLightness = '0%';
-    lightColorLightness = '0%';
-
-    darkColorPurple = '100%';
 
     // add active class
     Bg3.classList.add('active');
